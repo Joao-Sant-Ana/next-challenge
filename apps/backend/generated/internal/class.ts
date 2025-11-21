@@ -10,43 +10,66 @@
  * Please import the `PrismaClient` class from the `client.ts` file instead.
  */
 
-import * as runtime from '@prisma/client/runtime/client';
+import * as runtime from '@prisma/client/runtime/library';
 import type * as Prisma from './prismaNamespace.js';
 
 const config: runtime.GetPrismaClientConfig = {
-    previewFeatures: [],
-    clientVersion: '7.0.0',
-    engineVersion: '0c19ccc313cf9911a90d99d2ac2eb0280c76c513',
+    generator: {
+        name: 'client',
+        provider: {
+            fromEnvVar: null,
+            value: 'prisma-client',
+        },
+        output: {
+            value: 'C:\\dev\\projects\\next-challenge-old\\apps\\backend\\generated',
+            fromEnvVar: null,
+        },
+        config: {
+            engineType: 'library',
+        },
+        binaryTargets: [
+            {
+                fromEnvVar: null,
+                value: 'windows',
+                native: true,
+            },
+        ],
+        previewFeatures: [],
+        sourceFilePath:
+            'C:\\dev\\projects\\next-challenge-old\\apps\\backend\\prisma\\schema.prisma',
+        isCustomOutput: true,
+    },
+    relativePath: '../prisma',
+    clientVersion: '6.19.0',
+    engineVersion: '2ba551f319ab1df4bc874a89965d8b3641056773',
+    datasourceNames: ['db'],
     activeProvider: 'postgresql',
+    postinstall: false,
+    inlineDatasources: {
+        db: {
+            url: {
+                fromEnvVar: 'DATABASE_URL',
+                value: null,
+            },
+        },
+    },
     inlineSchema:
-        '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../generated"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  name      String\n  email     String   @unique\n  password  String\n  createdAt DateTime @map("created_at")\n}\n\nmodel Zone {\n  id        String   @id @default(uuid())\n  name      String\n  type      String\n  geometry  Json\n  createdAt DateTime @map("created_at")\n}\n',
+        '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../generated"\n}\n\ndatasource db {\n  provider = "postgresql"\n  url      = env("DATABASE_URL")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  name      String\n  email     String   @unique\n  password  String\n  createdAt DateTime @map("created_at")\n}\n\nmodel Zone {\n  id        String   @id @default(uuid())\n  name      String\n  type      String\n  geometry  Json\n  createdAt DateTime @map("created_at")\n}\n',
+    inlineSchemaHash: '95f91a1f6661d84d35a110983b2368772dc784bc010751db698769594cdbe456',
+    copyEngine: true,
     runtimeDataModel: {
         models: {},
         enums: {},
         types: {},
     },
+    dirname: '',
 };
 
 config.runtimeDataModel = JSON.parse(
-    '{"models":{"User":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"email","kind":"scalar","type":"String"},{"name":"password","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"}],"dbName":null},"Zone":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"type","kind":"scalar","type":"String"},{"name":"geometry","kind":"scalar","type":"Json"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"}],"dbName":null}},"enums":{},"types":{}}',
+    '{"models":{"User":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":null,"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"password","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","dbName":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Zone":{"dbName":null,"schema":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"String","nativeType":null,"default":{"name":"uuid","args":[4]},"isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"type","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"geometry","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Json","nativeType":null,"isGenerated":false,"isUpdatedAt":false},{"name":"createdAt","dbName":"created_at","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"DateTime","nativeType":null,"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false}},"enums":{},"types":{}}',
 );
-
-async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
-    const { Buffer } = await import('node:buffer');
-    const wasmArray = Buffer.from(wasmBase64, 'base64');
-    return new WebAssembly.Module(wasmArray);
-}
-
-config.compilerWasm = {
-    getRuntime: async () => await import('@prisma/client/runtime/query_compiler_bg.postgresql.mjs'),
-
-    getQueryCompilerWasmModule: async () => {
-        const { wasm } = await import(
-            '@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.mjs'
-        );
-        return await decodeBase64AsWasm(wasm);
-    },
-};
+config.engineWasm = undefined;
+config.compilerWasm = undefined;
 
 export type LogOptions<ClientOptions extends Prisma.PrismaClientOptions> =
     'log' extends keyof ClientOptions
@@ -79,7 +102,7 @@ export interface PrismaClientConstructor {
         ExtArgs extends
             runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
     >(
-        options: Prisma.Subset<Options, Prisma.PrismaClientOptions>,
+        options?: Prisma.Subset<Options, Prisma.PrismaClientOptions>,
     ): PrismaClient<LogOpts, OmitOpts, ExtArgs>;
 }
 
@@ -99,7 +122,7 @@ export interface PrismaClientConstructor {
 
 export interface PrismaClient<
     in LogOpts extends Prisma.LogLevel = never,
-    in out OmitOpts extends Prisma.PrismaClientOptions['omit'] = undefined,
+    in out OmitOpts extends Prisma.PrismaClientOptions['omit'] = Prisma.PrismaClientOptions['omit'],
     in out ExtArgs extends
         runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > {
@@ -234,6 +257,7 @@ export interface PrismaClient<
     get zone(): Prisma.ZoneDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
-export function getPrismaClientClass(): PrismaClientConstructor {
+export function getPrismaClientClass(dirname: string): PrismaClientConstructor {
+    config.dirname = dirname;
     return runtime.getPrismaClient(config) as unknown as PrismaClientConstructor;
 }
