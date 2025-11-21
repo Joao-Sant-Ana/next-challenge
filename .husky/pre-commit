@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Rodando ESLint e Prettier..."
+pnpm dlx lint-staged || exit 1
+
+echo "🔨 Rodando build do monorepo..."
+pnpm run build || exit 1

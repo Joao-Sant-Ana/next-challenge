@@ -1,0 +1,19 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+commit_msg=$(cat "$1")
+
+# Regex permitido
+pattern="^(feat|fix|refactor|documentation)(\(.+\))?: .+"
+
+if ! echo "$commit_msg" | grep -Eq "$pattern"; then
+  echo "❌ Mensagem de commit inválida!"
+  echo "➡️  Ela deve começar com: feat | fix | refactor | documentation"
+  echo ""
+  echo "Exemplos válidos:"
+  echo "  feat: adicionar cadastro de zonas"
+  echo "  fix(api): corrigir validação de GeoJSON"
+  echo "  refactor(frontend): separar componentes do mapa"
+  echo "  documentation: atualizar README"
+  exit 1
+fi
