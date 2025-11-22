@@ -22,7 +22,7 @@
         "strictBindCallApply": false,
         "noFallthroughCasesInSwitch": false,
         "noUncheckedIndexedAccess": false,
-        "types": ["node"]
+        "types": ["node", "jest"]
     },
     "include": ["**/*.ts", "generated/prisma/**/*.ts"],
     "exclude": ["dist", "node_modules"]
